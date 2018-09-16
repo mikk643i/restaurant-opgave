@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant opgave</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0 auto;
+        }
+
+        .retContainer {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+        }
+
+        @media only screen and (max-width: 1229px) {
+            .retContainer {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media only screen and (max-width: 830px) {
+            .ret img {
+                width: 100%
+            }
+            .retContainer {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media only screen and (max-width: 425px) {
+            .ret img {
+                width: 100%
+            }
+            .retContainer {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        #modal {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-color: rgba(0, 0, 0, .7);
+            text-align: center;
+            /*display: none;*/
+            transition: all 1s;
+            opacity: 0;
+            pointer-events: none;
+            font-family: 'Montserrat', sans-serif;
+            overflow: scroll;
+        }
+
+        #modal-content {
+            width: 90vw;
+            height: 100vh;
+            padding: 10px;
+            background-color: rgba(250, 250, 250, 1);
+            margin: auto;
+        }
+
+        #modal.vis {
+            /* display: block;*/
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        header img {
+            width: 100vw;
+            height 50vw;
+            margin: 0 auto;
+        }
+
+        header {
+            text-transform: capitalize;
+            background: #DB7703;
+        }
+
+        nav {
+            text-align: center;
+            padding-bottom: 20px;
+
+
+
+        }
+
+        .menu-item {
+            font-size: 15px;
+            margin: 5px 10px 5px 10px;
+            color: white;
+            border: none;
+            border-radius: 15px;
+
+            cursor: pointer;
+
+        }
+
+        .menu-item:hover {
+            background-color: transparent;
+        }
+
+        .menu-item:active {
+            background-color: transparent;
+            transform: translateY(4px);
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Arek Latin', bold;
+            color: white;
+        }
+
+        .ret {
+            text-align: center;
+            font-family: 'Arek Latin', bold;
+            color: white;
+        }
+
+        .logo {
+
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 10%;
+
+        }
+
+        .background {
+            background-color: #464857;
+        }
+
+        .footer_grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+
+
+        .footer_1 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 200px;
+            background: #f43002;
+        }
+
+        .footer_2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 200px;
+            background: #000000;
+        }
+
+        .footer_3 {
+            display: grid;
+            grid-column-start: span 2;
+            height: 200px;
+            background: pink;
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <section id="modal">
+        <button>Close</button>
+        <div id="modal-content">
+            <h2 class="modal-navn"></h2>
+            <img class="modal-billede" src="" alt="">
+            <p class="modal-beskrivelse" data-beskrivelse></p>
+            <p>Pris: <span class="pris" data-pris></span>,- </p>
+        </div>
+    </section>
+
+    <header>
+        <img class="logo" src="logo_mexi.svg" alt="logo_mexi">
+
+        <h1>Menu</h1>
+        <nav>
+            <button class="menu-item" data-kategori="alle">Alle retter</button>
+            <button class="menu-item" data-kategori="tacos">Tacos</button>
+            <button class="menu-item" data-kategori="sides">Sides</button>
+            <button class="menu-item" data-kategori="drinks">Drinks</button>
+
+        </nav>
+    </header>
+
+    <div class="background">
+
+        <main class="retContainer"></main>
+
+        <template class="retTemplate">
+        <article class="ret">
+            <h2 class="overskrift" data-navn></h2>
+            <img class="billede" data-billede src="" alt="">
+            <p class="beskrivelse" data-beskrivelse></p>
+            <p class="langBeskrivelse" data-langbeskrivelse></p>
+            <p>Pris: <span class="pris" data-pris></span>,- </p>
+
+        </article>
+    </template>
+
+    </div>
+
+    <script>
+        let modal = document.querySelector("#modal");
+        let dest = document.querySelector(".retContainer"),
+            retter, menuFilter = "alle";
+
+        document.addEventListener("DOMContentLoaded", hentJson);
+        async function hentJson() {
+            let jsonData = await fetch("menu.json");
+            retter = await jsonData.json();
+            visRetter();
+        }
+        document.querySelectorAll(".menu-item").forEach(knap => {
+            knap.addEventListener("click", filtrering)
+        });
+
+        function filtrering() {
+            dest.textContent = "";
+            menuFilter = this.getAttribute("data-kategori");
+            visRetter();
+        }
+
+        function visRetter() {
+            let temp = document.querySelector(".retTemplate");
+            let dest = document.querySelector(".retContainer");
+            document.querySelector("header h1").textContent = menuFilter;
+            retter.forEach(ret => {
+                if (ret.kategori == menuFilter || menuFilter == "alle") {
+                    let klon = temp.cloneNode(true).content;
+                    klon.querySelector("[data-navn]").textContent = ret.navn;
+                    klon.querySelector("[data-billede]").src = "imgs/small/" + ret.billede + ".jpg";
+                    klon.querySelector("[data-billede]").addEventListener("click", () => {
+                        visModal(ret);
+                    });
+                    klon.querySelector("[data-beskrivelse]").textContent = ret.beskrivelse;
+                    klon.querySelector("[data-pris]").textContent = ret.pris;
+                    dest.appendChild(klon);
+                }
+            });
+        }
+
+
+        function visModal(retter) {
+            modal.classList.add("vis");
+            modal.querySelector(".modal-navn").textContent = retter.navn;
+            modal.querySelector(".modal-billede").src = "imgs/small/" + retter.billede + ".jpg";
+            modal.querySelector(".modal-billede").alt = "" + retter.navn;
+            modal.querySelector(".modal-beskrivelse").textContent = retter.beskrivelse;
+            modal.querySelector(".pris").textContent = retter.pris;
+
+            modal.querySelector("button").addEventListener("click", skjulModal);
+        }
+
+        function skjulModal() {
+            modal.classList.remove("vis");
+            //window.scrollTo(0);
+        }
+
+    </script>
+
+    <div class="footer_grid">
+
+
+
+        <footer class="footer_1"></footer>
+        <footer class="footer_2"></footer>
+        <footer class="footer_3"></footer>
+
+    </div>
+
+</body>
+
+</html>
