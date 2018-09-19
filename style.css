@@ -78,6 +78,10 @@
      pointer-events: all;
  }
 
+ .modal-billede {
+     width: 50vh;
+ }
+
  header img {
      width: 100vw;
      height 50vw;
@@ -174,14 +178,17 @@
      font-family: 'Montserrat', bold;
  }
 
- .footer {
-     display: grid;
-     grid-gap: 10px;
-
+ .om_section {
+     background-color: black;
+     width: 100%;
  }
 
- .footer_1 {
-     grid-column-start: 2;
-     grid-column-end: five;
-     grid-row-start: row1-start grid-row-end: 3;
+ .footer {
+     position: fixed;
+     left: 0;
+     bottom: 0;
+     width: 100%;
+     background-color: #2A303E;
+     color: white;
+     text-align: center;
  }

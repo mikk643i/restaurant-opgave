@@ -7,6 +7,7 @@
     <title>Restaurant opgave</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 </head>
@@ -117,7 +118,7 @@
         function visModal(retter) {
             modal.classList.add("vis");
             modal.querySelector(".modal-navn").textContent = retter.navn;
-            modal.querySelector(".modal-billede").src = "imgs/medium/" + retter.billede + ".jpg";
+            modal.querySelector(".modal-billede").src = "imgs/small/" + retter.billede + ".jpg";
             modal.querySelector(".modal-billede").alt = "" + retter.navn;
             modal.querySelector(".modal-beskrivelse").textContent = retter.beskrivelse;
             modal.querySelector(".pris").textContent = retter.pris;
@@ -136,6 +137,13 @@
             window.history.back();
         }
     </script>
+
+    <div class="footer">
+        <h3>Taqueria</h3>
+        <p>Slagterboderne 8</p>
+        <p>Sunday to Thursday 11.00 - 20.00 Friday</p>
+        <p>Saturday 11.00 - 22.00</p>
+    </div>
 
 
 </body>
