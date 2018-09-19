@@ -26,6 +26,8 @@
         <img class="logo" src="logo_mexi.svg" alt="logo_mexi">
 
         <h1>Menu</h1>
+
+        <!--        Knapper til filtrering af retter -->
         <nav class="nav">
             <button class="menu-item" data-kategori="alle">Alle</button>
             <button class="menu-item" data-kategori="tacos">Tacos</button>
@@ -37,7 +39,11 @@
 
     <div class="background">
 
+
+
         <main class="retContainer"></main>
+
+        <!--        Templaten classen bruges til visning af den enkelte ret-->
 
         <template class="retTemplate">
         <article class="ret">
@@ -56,22 +62,35 @@
         let modal = document.querySelector("#modal");
         let dest = document.querySelector(".retContainer"),
             retter, menuFilter = "alle";
-
+        /*function indlæser dataterne fra json fil henter informationerne via et array og til sidst kalder man på den via visRetter() */
         document.addEventListener("DOMContentLoaded", hentJson);
+        /* Her bliver variablen jsonData sat til at være date fra json-filen */
         async function hentJson() {
             let jsonData = await fetch("menu.json");
+
+            /* Her bliver alle objekter hente ind i min array*/
+
             retter = await jsonData.json();
+
+            /* og til sidst kalder man function visRetter for at se Json-fil */
             visRetter();
         }
+
+        /* I filtreringen kalder man på hele sin klasse .menu-item og siger at forEach knap skal den filterer den kategori man har fri sin json-fil*/
         document.querySelectorAll(".menu-item").forEach(knap => {
             knap.addEventListener("click", filtrering)
         });
+
+
+        /*Selve function "henter" den data-værdi der er på menu den pågældende menu knap og så kan man filtrer den pågældende kategori. */
 
         function filtrering() {
             dest.textContent = "";
             menuFilter = this.getAttribute("data-kategori");
             visRetter();
         }
+
+        /* function visRetter viser alle informationerne i dest version, her bliver alt kaldt som man har af information til billeder som man også smider et eventhandler på og hvilken src de har */
 
         function visRetter() {
             let temp = document.querySelector(".retTemplate");
@@ -92,6 +111,7 @@
             });
         }
 
+        /* function visModal viser modalvinduet, og udfylder samtidg den på gældende rets informationer i modal-vinduet til sidste et der sat en eventListener på som udfører function skjulModal ved 'click' */
 
         function visModal(retter) {
             modal.classList.add("vis");
@@ -104,11 +124,12 @@
             modal.querySelector("button").addEventListener("click", skjulModal);
         }
 
+
+        /* funtionen skjulModal skjuler modalvinduet*/
         function skjulModal() {
             modal.classList.remove("vis");
             //window.scrollTo(0);
         }
-
     </script>
 
 

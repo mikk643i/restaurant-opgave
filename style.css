@@ -44,6 +44,8 @@
      }
  }
 
+ /*Her kan man se mit modal vindue inde man klikker på det */
+
  #modal {
      width: 100vw;
      height: 100vh;
@@ -57,6 +59,8 @@
      font-family: 'Montserrat', sans-serif;
      overflow: scroll;
  }
+
+ /*Her kan man se mit modal vindue når man er inde på det og her jeg fx gjort at at baggrunden på modal vinduet er transparent så man stadig kan se den "normale" side i baggrunden  */
 
  #modal-content {
      width: 60vw;
