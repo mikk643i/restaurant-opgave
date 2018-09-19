@@ -3,9 +3,9 @@
  }
 
  .retContainer {
+
      display: grid;
      grid-template-columns: 1fr 1fr 1fr;
-
 
  }
 
@@ -56,7 +56,7 @@
      transition: all 1s;
      opacity: 0;
      pointer-events: none;
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', bold;
      overflow: scroll;
  }
 
@@ -86,7 +86,11 @@
 
  header {
      text-transform: capitalize;
-     background: #DB7703;
+     width: 100%;
+     background-size: cover;
+     background-repeat: no-repeat, repeat;
+     background-image: url(MexicanFood_Header-1230x356.jpg);
+     padding: 10px;
  }
 
  .nav {
@@ -110,19 +114,18 @@
      color: #fff;
      background-color: #464857;
      border: none;
-     border-radius: 10px;
      box-shadow: 0 5px #595A6C;
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', bold;
 
 
  }
 
  .menu-item:hover {
-     background-color: #3e8e41
+     background-color: #DB7703;
  }
 
  .menu-item:active {
-     background-color: #3e8e41;
+     background-color: #595A6C;
      box-shadow: 0 5px #666;
      transform: translateY(4px);
  }
@@ -130,10 +133,11 @@
  h1 {
      text-align: center;
      font-family: 'Arek Latin', bold;
-     color: #464857;
+     color: white;
  }
 
  .ret {
+     padding-top: 10px;
      text-align: center;
      font-family: 'Arek Latin', bold;
      color: white;
@@ -144,7 +148,7 @@
      display: block;
      margin-left: auto;
      margin-right: auto;
-     width: 10vw;
+     width: 15vw;
 
  }
 
@@ -161,13 +165,23 @@
  }
 
  .beskrivelse {
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', bold;
+     padding: 10px;
+     line-height: 1.5;
  }
 
  p {
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', bold;
  }
 
  .footer {
      display: grid;
+     grid-gap: 10px;
+
+ }
+
+ .footer_1 {
+     grid-column-start: 2;
+     grid-column-end: five;
+     grid-row-start: row1-start grid-row-end: 3;
  }
