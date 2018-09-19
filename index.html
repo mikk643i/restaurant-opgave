@@ -13,7 +13,7 @@
 
 <body>
     <section id="modal">
-        <button>Close</button>
+        <button>X</button>
         <div id="modal-content">
             <h2 class="modal-navn"></h2>
             <img class="modal-billede" src="" alt="">
@@ -26,8 +26,8 @@
         <img class="logo" src="logo_mexi.svg" alt="logo_mexi">
 
         <h1>Menu</h1>
-        <nav>
-            <button class="menu-item" data-kategori="alle">Alle retter</button>
+        <nav class="nav">
+            <button class="menu-item" data-kategori="alle">Alle</button>
             <button class="menu-item" data-kategori="tacos">Tacos</button>
             <button class="menu-item" data-kategori="sides">Sides</button>
             <button class="menu-item" data-kategori="drinks">Drinks</button>
@@ -96,7 +96,7 @@
         function visModal(retter) {
             modal.classList.add("vis");
             modal.querySelector(".modal-navn").textContent = retter.navn;
-            modal.querySelector(".modal-billede").src = "imgs/small/" + retter.billede + ".jpg";
+            modal.querySelector(".modal-billede").src = "imgs/medium/" + retter.billede + ".jpg";
             modal.querySelector(".modal-billede").alt = "" + retter.navn;
             modal.querySelector(".modal-beskrivelse").textContent = retter.beskrivelse;
             modal.querySelector(".pris").textContent = retter.pris;
@@ -111,15 +111,6 @@
 
     </script>
 
-    <div class="footer_grid">
-
-
-
-        <footer class="footer_1"></footer>
-        <footer class="footer_2"></footer>
-        <footer class="footer_3"></footer>
-
-    </div>
 
 </body>
 
